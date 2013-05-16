@@ -1,0 +1,28 @@
+<!-- Toolbar -->
+{% macro toolbar(class=None) %}
+    <div class="toolbar{{ ' ' + class if class }}">
+        {{ caller() }}
+    </div>
+{%- endmacro %}
+
+<!-- Menu -->
+{% macro menu(name, items=[], icon=None, class=None) %}
+<ul data-menu="{{ name }}"{{ ' data-icon="%s"'|safe % icon if icon }} class="menu{{ ' ' + class if class }}">
+    {%- for i in items -%}
+    {{ i }}
+    {%- endfor %}
+</ul>
+{%- endmacro %}
+
+{% macro menuitem(name, label, url, icon=None, button=False, menu=None, class=None) %}
+<li{{ ' data-menuitem="%s"'|safe % name if name }} class="menuitem{{ ' ' + class if class }}">
+    {% if button %}
+    <button name="{{ name }}" type="submit"{{ ' data-icon="%s"'|safe % icon if icon }}>{{ label }}</button>
+    {% elif url %}
+    <a href="{{ url }}"{{ ' data-icon="%s"'|safe % icon if icon }}>{{- label|safe if label -}}</a>
+    {% else %}
+    <span{{ ' data-icon="%s"'|safe % icon if icon }}>{{- label|safe if label -}}</span>
+    {% endif %}
+    {{ menu if menu }}
+</li>
+{%- endmacro %}

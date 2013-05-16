@@ -1,0 +1,9 @@
+{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    <ul class="msglist">
+        {% for cat, msg in messages %}
+        <li class="msg{{ cat }}">{{ msg }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endwith %}

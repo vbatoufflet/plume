@@ -1,0 +1,139 @@
+
+.pane {
+    float: left;
+    width: @PaneWidth;
+
+    .content {
+        bottom: 0;
+        color: @PaneTextColor;
+        left: 0;
+        overflow-x: hidden;
+        position: absolute;
+        top: (@HeaderHeight + @ToolbarHeight);
+        width: @PaneWidth;
+
+        h1 {
+            font-size: 1em;
+            font-weight: 400;
+            padding: 1em 0.85em 0.5em;
+            text-transform: uppercase;
+        }
+
+        ul {
+            list-style-type: none;
+
+            li {
+                margin-left: 1.25em;
+            }
+
+            a {
+                color: @PaneTextColor;
+            }
+
+            &.tabs {
+                line-height: 3em;
+                padding-right: 0;
+
+                li {
+                    padding: 0 1em;
+
+                    a {
+                        display: block;
+                        text-decoration: none;
+                    }
+
+                    &.current {
+                        background-color: @ViewBackgroundColor;
+                    }
+                }
+            }
+        }
+
+        & > ul {
+            font-size: 0.85em;
+            padding: 0 1em 1em;
+
+            & > li {
+                margin-left: 0;
+            }
+        }
+
+        p {
+            font-weight: 300;
+        }
+
+        strong {
+            font-weight: 400;
+        }
+
+        .msginfo,
+        .msgwarn {
+            padding: 0.5em 0.5em 0.5em 3em;
+
+            &:before {
+                .icon;
+                font-size: 1.25em;
+                left: 0.5em;
+                position: absolute;
+                text-align: center;
+                width: 1.5em;
+            }
+        }
+
+        .msginfo {
+            background-color: @InfoBackgroundColor;
+            color: @InfoTextColor;
+
+            &:before {
+                content: '\f06a';
+            }
+        }
+
+        .msgwarn {
+            background-color: @WarnBackgroundColor;
+            color: @WarnTextColor;
+
+            &:before {
+                content: '\f071';
+            }
+        }
+
+        .footer {
+            bottom: 2.5em;
+            position: absolute !important;
+            right: 0;
+
+            a {
+                white-space: nowrap;
+            }
+        }
+
+        &[data-icon] {
+            * {
+                position: relative;
+            }
+
+            &:before {
+                .icon;
+                bottom: 0;
+                color: darken(@BackgroundColor, 5);
+                direction: rtl;
+                display: block;
+                font-size: 24em;
+                margin-right: 0;
+                overflow: hidden;
+                position: fixed;
+                text-align: right;
+                text-indent: -0.1em;
+                width: 25%;
+                z-index: -1;
+            }
+        }
+    }
+
+    &.folded {
+        .content {
+            display: none;
+        }
+    }
+}

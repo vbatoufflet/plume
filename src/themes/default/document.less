@@ -1,0 +1,260 @@
+.document () {
+    background-color: @ViewBackgroundColor;
+    bottom: 0;
+    font-weight: 300;
+    left: 0;
+    line-height: 1.5em;
+    overflow: auto;
+    padding: 2em;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    h1, h2, h3, h4, h5, h6, p, dl, ol, ul {
+        margin: 1em 0;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 400;
+    }
+
+    dl, ol, ul {
+        padding: 0 2em;
+    }
+
+    blockquote {
+        border-left: 0.25em solid darken(@ViewBackgroundColor, 10);
+        color: lighten(@ViewTextColor, 35);
+        padding: 0 1em;
+    }
+
+    code, pre {
+        font-family: 'Anonymous Pro', monospace;
+        font-size: 0.85em;
+    }
+
+    pre {
+        background-color: @ContentCodeBackgroundColor;
+        color: @ContentCodeTextColor;
+        border-radius: 0.15em;
+        overflow: auto;
+        text-overflow: ellipsis;
+    }
+
+    pre {
+        line-height: 1.25em;
+        padding: 0.75em;
+        position: relative;
+
+        & > code {
+            display: block;
+        }
+    }
+
+    p > code {
+        padding: 0 0.125em;
+    }
+
+    table {
+        border: none;
+        border-spacing: 0;
+        line-height: 1.75em;
+
+        tr:nth-child(odd) {
+            background: darken(@ViewBackgroundColor, 5);
+        }
+
+        th, td {
+            padding: 0.125em 0.5em;
+        }
+
+        th {
+            background: darken(@ViewBackgroundColor, 20);
+            font-weight: 400;
+            height: 1.75em;
+            text-align: left;
+        }
+
+        &.history {
+            width: 100%;
+
+            & + p {
+                margin-top: 1em;
+            }
+
+            tr:nth-child(odd) {
+                background: darken(@ViewBackgroundColor, 5);
+            }
+
+            .diff,
+            .date,
+            .author {
+                white-space: nowrap;
+            }
+
+            .diff {
+                padding-right: 0.25em;
+
+                & + td {
+                    padding-left: 0.25em;
+                }
+
+                input[type=radio] {
+                    margin: 0 0.125em;
+                }
+            }
+
+            .desc {
+                width: 100%;
+            }
+        }
+
+        &.diff {
+            background-color: darken(@ViewBackgroundColor, 2.5);
+            border-bottom: 0.25em solid darken(@ViewBackgroundColor, 20);
+            width: 100%;
+
+            thead {
+                th {
+                    background-color: darken(@ViewBackgroundColor, 50);
+                    color: @ViewBackgroundColor;
+                    font-weight: 400;
+                }
+            }
+
+            tbody {
+                font-family: 'Anonymous Pro', monospace;
+                font-size: 0.75em;
+                line-height: 1.5em;
+
+                th, td {
+                    padding: 0 1px 1px 1px;
+
+                    &.diff_header,
+                    &.diff_next {
+                        background-color: darken(@ViewBackgroundColor, 10);
+                        padding: 0 0.5em;
+                    }
+
+                    &.diff_header {
+                        color: lighten(@ViewTextColor, 35);
+                        padding-left: 0.25em;
+                    }
+
+                    &.diff_next {
+                        padding-right: 0.25em;
+                    }
+
+                    &[nowrap] {
+                        width: 50%;
+                    }
+                }
+
+                span {
+                    display: inline-block;
+
+                    &.diff_add {
+                        background-color: @ViewDiffAdd;
+                    }
+
+                    &.diff_chg {
+                        background-color: @ViewDiffChange;
+                    }
+
+                    &.diff_sub {
+                        background-color: @ViewDiffSubstract;
+                    }
+                }
+            }
+        }
+
+        &.search {
+            line-height: 1em;
+            width: 100%;
+
+            td {
+                padding: 0.5em;
+            }
+
+            .page {
+                vertical-align: top;
+                width: 100%;
+
+                .rev {
+                    color: lighten(@ViewTextColor, 50);
+                    font-size: 0.75em;
+                    margin-left: 0.5em;
+                }
+
+                .preview {
+                    color: lighten(@ViewTextColor, 35);
+                    display: block;
+                    font-size: 0.85em;
+
+                    .match {
+                        background-color: @ViewMatchHighlight;
+                    }
+                }
+            }
+
+            .info {
+                color: lighten(@ViewTextColor, 35);
+                text-align: right;
+                white-space: nowrap;
+
+                span {
+                    display: block;
+                }
+
+                .date {
+                    font-size: 0.85em;
+                }
+
+                .author {
+                    font-size: 0.75em;
+                }
+            }
+        }
+    }
+
+    form {
+        line-height: 1.5em;
+
+        p {
+            margin: 1em 0;
+
+            &:last-child {
+                margin-top: 2em;
+            }
+        }
+
+        label {
+            display: block;
+            margin: 1em 0 0.5em;
+
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+
+        input[type=text],
+        input[type=password] {
+            width: 25%;
+        }
+    }
+
+    & > .preview {
+        background-color: darken(@ViewBackgroundColor, 5);
+        border: 0.25em solid darken(@ViewBackgroundColor, 10);
+        padding: 2em;
+        text-align: center;
+    }
+
+    & > :last-child {
+        margin-bottom: 2em;
+    }
+}

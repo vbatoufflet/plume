@@ -1,0 +1,28 @@
+{%- extends "layout.html" -%}
+
+{% set title = _('Delete - %(path)s', path=docpath) %}
+
+{% set pane_icon = 'delete' %}
+
+{% block view_toolbar %}
+    {% call m.toolbar() %}
+        {{ m.menu('view', items=[
+            m.menuitem('title', _('Document deletion'), None, 'delete'),
+        ]) }}
+    {%- endcall %}
+{% endblock %}
+
+{% block view_content %}
+    <div class="document">
+        <form action="{{ url_for('index', path=docpath, do='delete') }}" method="post">
+            {% include "message.html" %}
+
+            <p>{{ _('You are about to delete “%(path)s” document. Are you sure?', path=docpath|strong) }}</p>
+
+            <p>
+                <input name="validate" type="submit" value="{{ _('Delete document') }}" />
+                <a href="{{ url_for('index', path=docpath) }}" class="button">{{ _('Cancel') }}</a>
+            </p>
+        </form>
+    </div>
+{% endblock %}

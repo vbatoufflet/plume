@@ -1,0 +1,146 @@
+
+.toolbar {
+    background-color: @ToolbarBackgroundColor;
+    color: @ToolbarTextColor;
+    height: 2em;
+    line-height: 2em;
+
+    [data-icon]:before {
+        float: left;
+    }
+
+    .menu {
+        list-style-type: none;
+
+        .menuitem {
+            padding: 0 0.65em;
+            position: relative;
+
+            &.drop:hover,
+            a:hover,
+            button:hover {
+                background-color: lighten(@ToolbarBackgroundColor, 6.5);
+                color: lighten(@ToolbarTextColor, 10);
+            }
+        }
+    }
+
+    & > .menu {
+        float: left;
+
+        & > .menuitem {
+            float: left;
+            height: 2em;
+
+            a,
+            button {
+                background: none;
+                display: block;
+                margin: 0 -0.65em;
+                padding: 0 0.65em;
+                text-decoration: none;
+                white-space: nowrap;
+            }
+
+            & > a,
+            & > button {
+                color: @ToolbarTextColor;
+                float: left;
+            }
+
+            & > button {
+                height: 100%;
+                line-height: 1em;
+            }
+
+            & > .menu {
+                background-color: @InputTextBackgroundColor;
+                box-shadow: 0 0 0.35em rgba(0, 0, 0, 0.5);
+                display: none;
+                position: absolute;
+                z-index: 200;
+
+                &.active {
+                    display: block;
+                }
+
+                &.top {
+                    bottom: 100%;
+                }
+
+                &.bottom {
+                    top: 100%;
+                }
+
+                &.left {
+                    left: 0;
+                }
+
+                &.right {
+                    right: 0;
+                }
+
+                a {
+                    color: lighten(@TextColor, 25);
+
+                    &:hover {
+                        color: lighten(@ToolbarTextColor, 10);
+                    }
+                }
+            }
+
+            &:hover > .menu {
+                display: block;
+            }
+        }
+
+        &[data-menu=pane-fold],
+        &[data-menu=view-action-more],
+        &[data-menu=view-action] {
+            float: right;
+        }
+
+        &[data-menu=pane] {
+            text-transform: uppercase;
+        }
+
+        &[data-menu=pane-fold],
+        &[data-menu=pane-unfold],
+        &[data-menu=view-action-more] {
+            [data-icon]:before {
+                margin-right: 0;
+            }
+        }
+
+        &[data-menu=pane-fold] {
+            margin-right: 1px;
+        }
+
+        [data-menuitem=locked] {
+            color: darken(@ToolbarTextColor, 40);
+        }
+    }
+}
+
+.pane.folded {
+    width: auto;
+
+    [data-menu=pane] {
+        display: none;
+    }
+}
+
+.view {
+    .toolbar {
+        background-color: lighten(@ToolbarBackgroundColor, 6.5);
+        width: 100%;
+
+        & > .menu {
+            & > .drop:hover,
+            & > .menuitem > a:hover,
+            & > .menuitem > button:hover {
+                background-color: lighten(@ToolbarBackgroundColor, 13.5);
+            }
+        }
+    }
+}

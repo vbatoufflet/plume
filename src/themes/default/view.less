@@ -1,0 +1,100 @@
+
+.view {
+    margin-left: @PaneWidth;
+    width: (100% - @PaneWidth);
+
+    .content {
+        bottom: 0;
+        left: @PaneWidth;
+        position: absolute;
+        right: 0;
+        top: (@HeaderHeight + @ToolbarHeight);
+
+        .document {
+            .document;
+
+            .footer {
+                color: lighten(@ViewTextColor, 65);
+                font-size: 0.85em;
+                margin-top: 4em;
+                text-align: right;
+            }
+        }
+
+        .editor {
+            background-color: @InputTextBackgroundColor;
+            bottom: 0;
+            left: 0;
+            line-height: 1em;
+            position: absolute;
+            right: 0;
+            top: 0;
+
+            textarea {
+                background: none;
+                border: none;
+                .box-sizing(border-box);
+                height: 100%;
+                padding: 0 0 0 0.25em;
+                resize: none;
+                width: 100%;
+            }
+        }
+    }
+
+    .msglist {
+        list-style-type: none;
+        padding: 0 !important;
+    }
+
+    .msginfo,
+    .msgwarn,
+    .msgerror {
+        border: 1px solid;
+        border-radius: 0.25em;
+        padding: 0.5em 0.5em 0.5em 3em;
+        position: relative;
+
+        &:before {
+            .icon;
+            font-size: 1.25em;
+            left: 0.5em;
+            position: absolute;
+            text-align: center;
+            width: 1.5em;
+        }
+    }
+
+    .msginfo {
+        background-color: @InfoBackgroundColor;
+        border-color: @InfoBorderColor;
+        color: @InfoTextColor;
+
+        &:before { content: '\f05a'; }
+    }
+
+    .msgwarn {
+        background-color: @WarnBackgroundColor;
+        border-color: @WarnBorderColor;
+        color: @WarnTextColor;
+
+        &:before { content: '\f071'; }
+    }
+
+    .msgerror {
+        background-color: @ErrorBackgroundColor;
+        border-color: @ErrorBorderColor;
+        color: @ErrorTextColor;
+
+        &:before { content: '\f06a'; }
+    }
+
+    &.full {
+        margin-left: 0;
+        width: 100%;
+
+        .content {
+            left: 0;
+        }
+    }
+}

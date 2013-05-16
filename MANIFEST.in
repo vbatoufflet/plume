@@ -1,0 +1,17 @@
+include Makefile
+
+include AUTHORS LICENSE README.md
+
+include scripts/plume.fcgi
+
+recursive-include docs *
+
+recursive-include share/documents *
+recursive-include share/static *
+recursive-include share/templates *.html
+
+recursive-include translations *.po
+recursive-include translations *.mo
+
+recursive-include src *
+exclude src/themes/*/styles*.css

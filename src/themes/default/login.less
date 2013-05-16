@@ -1,0 +1,33 @@
+
+body > form[action$=signin] {
+    .header-menu;
+    margin: 5% auto;
+
+    .logo {
+        margin-bottom: 2em;
+        text-align: center;
+
+        img {
+            height: 64px;
+            vertical-align: middle;
+            width: 64px;
+        }
+    }
+
+    .error {
+        background-color: @ErrorBackgroundColor;
+        border: 0.25em solid @ErrorBorderColor;
+        color: @ErrorTextColor;
+        list-style-type: none;
+        margin: 1em;
+        padding: 0.5em 1em;
+    }
+
+    .action {
+        background-color: inherit;
+
+        input[type=submit] {
+            width: 100%;
+        }
+    }
+}

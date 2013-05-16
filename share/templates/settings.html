@@ -1,0 +1,69 @@
+{% if not included %}
+{%- extends "layout.html" -%}
+{% endif %}
+
+{% set title = _('User settings') %}
+
+{% block pane_content -%}
+    <h1>{{ _('Settings') }}</h1>
+    <ul class="tabs">
+        <li{{ ' class="current"'|safe if page == 'identity' }}><a href="{{ url_for('settings', page='identity') }}">{{ _('Identity information') }}</a></li>
+        <li{{ ' class="current"'|safe if page == 'regional' }}><a href="{{ url_for('settings', page='regional') }}">{{ _('Regional settings') }}</a></li>
+        <li{{ ' class="current"'|safe if page == 'password' }}><a href="{{ url_for('settings', page='password') }}">{{ _('Password change') }}</a></li>
+    </ul>
+{%- endblock %}
+
+{% block view_toolbar -%}
+    {% call m.toolbar() %}
+        {{ m.menu('view-action', items=[
+            m.menuitem('back', _('Back to main page'), url_for('index'), 'back'),
+        ]) }}
+    {%- endcall %}
+{%- endblock %}
+
+{% block view_content -%}
+<div class="document">
+    <form action="{{ url_for('settings', page=page) }}" method="post">
+        {% include "message.html" %}
+
+        <p>
+            {% if page == 'regional' %}
+            <label for="locale">{{ _('Language') }}</label>
+            <select id="locale" name="locale"{{ ' disabled="disabled"'|safe if not locales|length }}>
+                {% if locales|length %}
+                {% for locale, label in locales %}
+                <option value="{{ locale }}"{{ ' selected="selected"'|safe if locale == current_locale }}>{{ label }}</option>
+                {% endfor %}
+                {% else %}
+                <option>{{ _('Not available') }}</option>
+                {% endif %}
+            </select>
+            <label for="timezone">{{ _('Time zone') }}</label>
+            <select id="timezone" name="timezone">
+                {% for tz in timezones %}
+                <option{{ ' selected="selected"'|safe if tz == current_timezone }}>{{ tz }}</option>
+                {% endfor %}
+            </select>
+            {% elif page == 'password' %}
+            <label for="password-current">{{ _('Current password') }}</label>
+            <input id="password-current" name="password-current" type="password" value="" autocomplete="off" />
+            <label for="password-new">{{ _('New password') }}</label>
+            <input id="password-new" name="password-new" type="password" value="" autocomplete="off" />
+            <label for="password-repeat">{{ _('Repeat password') }}</label>
+            <input id="password-repeat" name="password-repeat" type="password" value="" autocomplete="off" />
+            {% else %}
+            <label for="login">{{ _('Login') }}</label>
+            <input id="login" name="login" type="text" value="{{ user.login }}" disabled="disabled" />
+            <label for="fullname">{{ _('Name') }}</label>
+            <input id="fullname" name="fullname" type="text" value="{{ user.fullname }}" placeholder="Full name" />
+            <label for="email">{{ _('Email') }}</label>
+            <input id="email" name="email" type="text" value="{{ user.email }}" placeholder="{{ _('Email address') }}" />
+            {% endif %}
+        </p>
+        <p>
+            <input name="validate" type="submit" value="{{ _('Save changes') }}" />
+            <input name="cancel" type="submit" value="{{ _('Cancel') }}" />
+        </p>
+    </form>
+</div>
+{%- endblock %}

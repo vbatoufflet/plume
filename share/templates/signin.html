@@ -1,0 +1,33 @@
+{% if not included %}
+{%- extends "layout.html" -%}
+{% endif %}
+
+{% block body -%}
+<form action="{{ url_for('signin') }}" method="post">
+    {% if not included %}
+    <div class="logo">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="">
+    </div>
+    {% endif %}
+
+    <p>
+        <input name="next" type="hidden" value="{{ next if next else request.form.get('next', request.args.get('next', url_for('index'))) }}" />
+        <input name="signin-login" type="text" value="{{ request.form.get('signin-username', '') }}" placeholder="{{ _('User name') }}" />
+        <input name="signin-password" type="password" placeholder="{{ _('Password') }}" />
+    </p>
+
+    <p class="action">
+        <input type="submit" value="{{ _('Sign in') }}" />
+    </p>
+
+    {% with messages = get_flashed_messages(with_categories=True, category_filter=['error']) %}
+        {% if messages %}
+    <ul class="msgerror">
+        {% for cat, msg in messages %}
+        <li>{{ msg }}</li>
+        {% endfor %}
+    </ul>
+        {% endif %}
+    {% endwith %}
+</form>
+{%- endblock %}

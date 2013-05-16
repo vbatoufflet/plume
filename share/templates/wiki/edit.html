@@ -1,0 +1,82 @@
+{%- extends "layout.html" -%}
+
+{% set title = _('Edit - %(path)s', path=docpath) %}
+
+{% set pane_icon = 'edit' %}
+
+{% block pane_content %}
+    {% if lock_info %}
+    <div class="msgwarn">
+        <p>{{ _('This document is currently being edited by %(author)s since %(date)s.', author=lock_info[0]|strong, date=lock_info[1]|datetimeformat|strong) }}</p>
+        <p><a href="{{ url_for('index', path=docpath, do='edit', force=1) }}">{{ _('Break lock') }}</a></p>
+    </div>
+    {% elif 'preview' in request.form %}
+    <div class="msgwarn">
+        <p>{{ _("This is a preview of your document. It hasn't be saved yet.") }}</p>
+    </div>
+    {% elif is_file and mimetype %}
+    <div class="msginfo">
+        <p>{{ _('Please note that the uploaded file type must have the exact same type that the previous one.') }}</p>
+    </div>
+    {% endif %}
+
+    {% if not is_file %}
+    <div class="footer">
+        <a href="{{ url_for('index', path='help:MarkdownCheatSheet') }}" target="_blank" data-icon="info" class="button">{{ _('Syntax help') }}</a>
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block view %}
+    <form action="{{ url_for('index', path=docpath, do='edit') }}" method="post"{{ ' enctype="multipart/form-data"'|safe if is_file }}>
+        {% call m.toolbar() %}
+            {{ m.menu('view', items=[
+                m.menuitem('title', _('Document upload') if is_file else _('Document edition'), None, 'edit'),
+            ]) }}
+
+            {% if lock_info %}
+            {{ m.menu('view-action', items=[
+                m.menuitem('locked', _('Document locked'), None, 'lock'),
+                m.menuitem('cancel', _('Cancel'), url_for('index', path=docpath), 'cross'),
+            ]) }}
+            {% else %}
+            {{ m.menu('view-action', items=[
+                m.menuitem('preview', _('Preview document'), None, 'view', button=True) if not is_file and not 'preview' in request.form,
+                m.menuitem('edit', _('Edit'), None, 'edit', button=True) if not is_file and 'preview' in request.form,
+                m.menuitem('save', _('Save document'), None, 'save', button=True) if not is_file and 'preview' in request.form,
+                m.menuitem('discard', _('Discard'), url_for('index', path=docpath, discard=1), 'cross'),
+            ]) }}
+            {% endif %}
+        {%- endcall %}
+
+        <div class="content">
+            {% if is_file %}
+            <div class="document">
+                {% include "message.html" %}
+
+                {% if lock_info %}
+                {% include "wiki/preview.html" %}
+                {% else %}
+                <p>{{ _('Please select a file to upload:') }}</p>
+                <p data-fileinput="attachment">
+                    <input name="name" type="text" placeholder="{{ _('No file selected') }}" />
+                    <input name="save" type="submit" value="{{ _('Upload file') }}" />
+                </p>
+                <p><input name="attachment" type="file" accept="{{ mimetype }}" /></p>
+                {% endif %}
+            </div>
+            {% elif 'preview' in request.form %}
+            <input name="data" type="hidden" value="{{ content }}" />
+            <div class="document">
+                {% include "message.html" %}
+
+                {{ content|render }}
+            </div>
+            {% else %}
+            <div class="editor">
+                <textarea name="data" cols="128" rows="32"{{ ' disabled="disabled"' if lock_info }}>{{ content if content }}</textarea>
+            </div>
+            {% endif %}
+        </div>
+    </form>
+{% endblock %}

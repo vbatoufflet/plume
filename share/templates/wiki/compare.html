@@ -1,0 +1,26 @@
+{%- extends "layout.html" -%}
+
+{% set title = _('Compare - %(path)s', path=docpath) %}
+
+{% set full = True %}
+
+{% block view_toolbar -%}
+    {% call m.toolbar() %}
+        {{ m.menu('view', items=[
+            m.menuitem('title', _('Document comparison'), None, 'diff'),
+        ]) }}
+
+        {{ m.menu('view-action', items=[
+            m.menuitem('back', _('Back to history'), url_for('index', path=docpath, do='history'), 'back'),
+        ]) }}
+    {%- endcall %}
+{%- endblock %}
+
+{% block view_content -%}
+    <div class="document">
+        {% include "message.html" %}
+
+        {{ content|safe }}
+    </div>
+{%- endblock %}
+

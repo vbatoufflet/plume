@@ -1,0 +1,422 @@
+# French translations for plume.
+# Copyright (C) 2013 Plume Developers
+# This file is distributed under the same license as the plume project.
+# Vincent Batoufflet <vincent@batoufflet.info>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plume 0.1\n"
+"Report-Msgid-Bugs-To: translate@renm.org\n"
+"POT-Creation-Date: 2013-04-28 12:50+0200\n"
+"PO-Revision-Date: 2013-04-14 13:16+0200\n"
+"Last-Translator: Vincent Batoufflet <vincent@batoufflet.info>\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 0.9.6\n"
+
+#: plume/action.py:86
+msgid "Document type differs from the previous one."
+msgstr "Le type du document diffère du précédent."
+
+#: plume/action.py:110
+msgid "A document with the same path already exists."
+msgstr "Un document existe déjà à cet emplacement."
+
+#: plume/app.py:169
+msgid "Authentication failed."
+msgstr "L'authentification a échoué."
+
+#: plume/app.py:196
+msgid "Current password is invalid."
+msgstr "Le mot de passe actuel n'est pas valide."
+
+#: plume/app.py:198
+msgid "Passwords don't match."
+msgstr "Les mots de passe ne correspondent pas."
+
+#: plume/app.py:202
+msgid "Password successfuly changed."
+msgstr "Changement de mot de passe effectué avec succès."
+
+#: plume/app.py:204
+#, python-format
+msgid "Password is too short. Must be a least %(length)d characters long."
+msgstr ""
+"Mot de passe trop court. Il doit comporter au minimum %(length)d "
+"caractères."
+
+#: plume/app.py:220
+msgid "Settings successfuly saved."
+msgstr "Préférences sauvegardées avec succès."
+
+#: plume/exception.py:30
+msgid "Invalid request"
+msgstr "Requête invalide"
+
+#: plume/exception.py:35
+msgid "Invalid revision number"
+msgstr "Numéro de révision invalide"
+
+#: plume/exception.py:40
+msgid "Document already exists"
+msgstr "Ce document existe déjà"
+
+#: plume/exception.py:45
+msgid "No such document"
+msgstr "Ce document n'existe pas"
+
+#: plume/exception.py:50
+msgid "Password is too short"
+msgstr "Mot de passe trop court"
+
+#: plume/exception.py:57
+msgid "Empty document path"
+msgstr "Emplacement du document vide"
+
+#: plume/exception.py:62
+msgid "Empty user name"
+msgstr "Nom d'utilisateur vide"
+
+#: plume/renderer.py:59 plume/renderer.py:60
+#, python-format
+msgid "Revision %d"
+msgstr "Révision %d"
+
+#: share/templates/error.html:3 share/templates/error.html:15
+msgid "Error"
+msgstr "Erreur"
+
+#: share/templates/error.html:19 share/templates/settings.html:17
+#: share/templates/wiki/search.html:14
+msgid "Back to main page"
+msgstr "Retour à la page d'accueil"
+
+#: share/templates/error.html:27
+#, python-format
+msgid "The following error occured while processing your request: %(path)s"
+msgstr ""
+"L'erreur suivante est survenue lors de l'exécution de votre requête : "
+"%(path)s"
+
+#: share/templates/error.html:29
+msgid "An unhandled error occured while processing your request."
+msgstr "Une erreur non gérée est survenue lors de l'exécution de votre requête."
+
+#: share/templates/layout.html:29
+msgid "A minimalist wiki solution"
+msgstr "Une solution de wiki minimaliste"
+
+#: share/templates/layout.html:31
+msgid "Go to main page"
+msgstr "Aller à la page d'accueil"
+
+#: share/templates/layout.html:36
+msgid "Search"
+msgstr "Rechercher"
+
+#: share/templates/layout.html:43 share/templates/signin.html:20
+msgid "Sign in"
+msgstr "Se connecter"
+
+#: share/templates/layout.html:57
+msgid "User settings"
+msgstr "Préférences utilisateur"
+
+#: share/templates/layout.html:60
+msgid "Sign out"
+msgstr "Se déconnecter"
+
+#: share/templates/settings.html:6
+msgid "Settings"
+msgstr "Préférences"
+
+#: share/templates/settings.html:8
+msgid "Identity information"
+msgstr "Informations utilisateur"
+
+#: share/templates/settings.html:9
+msgid "Regional settings"
+msgstr "Paramètres régionaux"
+
+#: share/templates/settings.html:10
+msgid "Password change"
+msgstr "Changement de mot de passe"
+
+#: share/templates/settings.html:29
+msgid "Language"
+msgstr "Langue"
+
+#: share/templates/settings.html:36
+msgid "Not available"
+msgstr "Non disponible"
+
+#: share/templates/settings.html:39
+msgid "Time zone"
+msgstr "Fuseau horaire"
+
+#: share/templates/settings.html:46
+msgid "Current password"
+msgstr "Mot de passe actuel"
+
+#: share/templates/settings.html:48
+msgid "New password"
+msgstr "Nouveau mot de passe"
+
+#: share/templates/settings.html:50
+msgid "Repeat password"
+msgstr "Répéter le mot de passe"
+
+#: share/templates/settings.html:53
+msgid "Login"
+msgstr "Identifiant"
+
+#: share/templates/settings.html:55
+msgid "Name"
+msgstr "Nom"
+
+#: share/templates/settings.html:57
+msgid "Email"
+msgstr "Courriel"
+
+#: share/templates/settings.html:58
+msgid "Email address"
+msgstr "Adresse de messagerie"
+
+#: share/templates/settings.html:62
+msgid "Save changes"
+msgstr "Sauvegarder les changements"
+
+#: share/templates/settings.html:63 share/templates/wiki/delete.html:24
+#: share/templates/wiki/edit.html:40 share/templates/wiki/move.html:31
+msgid "Cancel"
+msgstr "Annuler"
+
+#: share/templates/signin.html:15
+msgid "User name"
+msgstr "Nom d'utilisateur"
+
+#: share/templates/signin.html:16
+msgid "Password"
+msgstr "Mot de passe"
+
+#: share/templates/wiki/compare.html:3
+#, python-format
+msgid "Compare - %(path)s"
+msgstr "Comparaison - %(path)s"
+
+#: share/templates/wiki/compare.html:10
+msgid "Document comparison"
+msgstr "Comparaison de document"
+
+#: share/templates/wiki/compare.html:14
+msgid "Back to history"
+msgstr "Retour à l'historique"
+
+#: share/templates/wiki/delete.html:3
+#, python-format
+msgid "Delete - %(path)s"
+msgstr "Suppression - %(path)s"
+
+#: share/templates/wiki/delete.html:10
+msgid "Document deletion"
+msgstr "Suppression de document"
+
+#: share/templates/wiki/delete.html:20
+#, python-format
+msgid "You are about to delete “%(path)s” document. Are you sure?"
+msgstr "Vous êtes sur le point de supprimer « %(path)s ». Êtes vous certain ?"
+
+#: share/templates/wiki/delete.html:23 share/templates/wiki/show.html:36
+msgid "Delete document"
+msgstr "Supprimer le document"
+
+#: share/templates/wiki/edit.html:3
+#, python-format
+msgid "Edit - %(path)s"
+msgstr "Édition - %(path)s"
+
+#: share/templates/wiki/edit.html:10
+#, python-format
+msgid "This document is currently being edited by %(author)s since %(date)s."
+msgstr "Ce document est en cours d'édition par %(author)s depuis %(date)s."
+
+#: share/templates/wiki/edit.html:11
+msgid "Break lock"
+msgstr "Briser le verrou"
+
+#: share/templates/wiki/edit.html:15
+msgid "This is a preview of your document. It hasn't be saved yet."
+msgstr ""
+"Ceci est un aperçu de votre document. Il n'est pas sauvegardé pour le "
+"moment."
+
+#: share/templates/wiki/edit.html:19
+msgid ""
+"Please note that the uploaded file type must have the exact same type "
+"that the previous one."
+msgstr ""
+"Veuillez noter que le fichier envoyé doit être exactement du même type "
+"que le fichier précédent."
+
+#: share/templates/wiki/edit.html:25
+msgid "Syntax help"
+msgstr "Aide sur la syntaxe"
+
+#: share/templates/wiki/edit.html:34
+msgid "Document upload"
+msgstr "Envoi de document"
+
+#: share/templates/wiki/edit.html:34
+msgid "Document edition"
+msgstr "Édition de document"
+
+#: share/templates/wiki/edit.html:39
+msgid "Document locked"
+msgstr "Document verrouillé"
+
+#: share/templates/wiki/edit.html:44
+msgid "Preview document"
+msgstr "Prévisualiser le document"
+
+#: share/templates/wiki/edit.html:45 share/templates/wiki/show.html:44
+msgid "Edit"
+msgstr "Éditer"
+
+#: share/templates/wiki/edit.html:46
+msgid "Save document"
+msgstr "Sauvegarder le document"
+
+#: share/templates/wiki/edit.html:47
+msgid "Discard"
+msgstr "Abandonner"
+
+#: share/templates/wiki/edit.html:60
+msgid "Please select a file to upload:"
+msgstr "Veuillez sélectionner un fichier à envoyer :"
+
+#: share/templates/wiki/edit.html:62
+msgid "No file selected"
+msgstr "Aucun fichier sélectionné"
+
+#: share/templates/wiki/edit.html:63 share/templates/wiki/show.html:35
+msgid "Upload file"
+msgstr "Envoyer le fichier"
+
+#: share/templates/wiki/history.html:3
+#, python-format
+msgid "History - %(path)s"
+msgstr "Historique - %(path)s"
+
+#: share/templates/wiki/history.html:10
+msgid "Document history"
+msgstr "Historique du document"
+
+#: share/templates/wiki/history.html:27 share/templates/wiki/history.html:55
+msgid "Compare revisions"
+msgstr "Comparaison de révisions"
+
+#: share/templates/wiki/history.html:30
+msgid ""
+"Click on one of the following dates to view the file as it was at that "
+"time:"
+msgstr ""
+"Cliquer sur l'une des dates suivantes pour afficher le fichier à l'état "
+"dans lequel il se trouvait à cette époque :"
+
+#: share/templates/wiki/move.html:3
+#, python-format
+msgid "Move - %(path)s"
+msgstr "Déplacement - %(path)s"
+
+#: share/templates/wiki/move.html:8
+msgid ""
+"Please note that all past revisions will be moved and that the old path "
+"will be lost."
+msgstr ""
+"Veuillez noter que toutes les révisions passées seront déplacées et que "
+"l'ancien emplacement sera perdu."
+
+#: share/templates/wiki/move.html:14
+msgid "Document move"
+msgstr "Déplacement de document"
+
+#: share/templates/wiki/move.html:25
+msgid "Document path"
+msgstr "Emplacement du document"
+
+#: share/templates/wiki/move.html:30 share/templates/wiki/show.html:37
+msgid "Move document"
+msgstr "Déplacer le document"
+
+#: share/templates/wiki/preview.html:5
+msgid "This file can't be previewed in your browser."
+msgstr "Ce fichier ne peut être visualisé dans votre navigateur."
+
+#: share/templates/wiki/preview.html:6
+msgid "Download file"
+msgstr "Télécharger le fichier"
+
+#: share/templates/wiki/search.html:3
+msgid "Search results"
+msgstr "Résultats de recherche"
+
+#: share/templates/wiki/search.html:10
+#, python-format
+msgid "Search results for “%(query)s”"
+msgstr "Résultats de recherche pour « %(query)s »"
+
+#: share/templates/wiki/search.html:30
+#, python-format
+msgid "revision %(revision)d"
+msgstr "révision %(revision)d"
+
+#: share/templates/wiki/search.html:34
+msgid "Deleted document"
+msgstr "Document supprimé"
+
+#: share/templates/wiki/search.html:38
+#, python-format
+msgid "Last updated on %(date)s"
+msgstr "Dernière mise à jour le %(date)s"
+
+#: share/templates/wiki/search.html:39
+#, python-format
+msgid "by %(author)s"
+msgstr "par %(author)s"
+
+#: share/templates/wiki/search.html:46
+msgid "No document found"
+msgstr "Aucun document trouvé"
+
+#: share/templates/wiki/show.html:16
+msgid "Table of contents"
+msgstr "Table des matières"
+
+#: share/templates/wiki/show.html:38
+msgid "Show source"
+msgstr "Afficher la source"
+
+#: share/templates/wiki/show.html:45 share/templates/wiki/show.html:50
+msgid "History"
+msgstr "Historique"
+
+#: share/templates/wiki/show.html:49
+msgid "Create document"
+msgstr "Créer le document"
+
+#: share/templates/wiki/show.html:62
+msgid "This document has been deleted."
+msgstr "Ce document a été supprimé."
+
+#: share/templates/wiki/show.html:64
+msgid "This document does not exist."
+msgstr "Ce document n'existe pas."
+
+#: share/templates/wiki/show.html:72
+#, python-format
+msgid "Last updated on %(date)s by %(author)s"
+msgstr "Dernière mise à jour le %(date)s par %(author)s"
+

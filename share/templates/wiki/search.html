@@ -1,0 +1,50 @@
+{%- extends "layout.html" -%}
+
+{% set title = _('Search results') %}
+
+{% set pane_icon = 'search' %}
+
+{% block view_toolbar -%}
+    {% call m.toolbar() %}
+        {{ m.menu('view', items=[
+            m.menuitem('title', _('Search results for “%(query)s”', query=request.args.get('q')|e), None, 'search'),
+        ]) }}
+
+        {{ m.menu('view-action', items=[
+            m.menuitem('back', _('Back to main page'), url_for('index'), 'back'),
+        ]) }}
+    {%- endcall %}
+{%- endblock %}
+
+{% block view_content -%}
+    <div class="document">
+        {% include "message.html" %}
+
+        {% if results and results|length %}
+        <table class="search">
+            <tbody>
+            {% for entry in results %}
+                <tr>
+                    <td class="page">
+                        <a href="{{ url_for('index', path=entry.path, rev=entry.revision) }}">{{ entry.path }}</a>
+                        <span class="rev">{{ _('revision %(revision)d', revision=entry.revision) }}</span>
+                        {% if entry.content %}
+                        <span class="preview">{{ entry.highlights('content', top=1)|safe }}</span>
+                        {% else %}
+                        <span data-icon="delete" class="preview">{{ _('Deleted document') }}</span>
+                        {% endif %}
+                    </td>
+                    <td class="info">
+                        <span data-icon="time" class="date">{{ _('Last updated on %(date)s', date=entry.date|datetimeformat) }}</span>
+                        <span class="author">{{ _('by %(author)s', author=entry.author) }}</span>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>{{ _('No document found') }}</p>
+        {% endif %}
+    </div>
+{%- endblock %}
+

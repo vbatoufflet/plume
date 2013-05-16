@@ -1,0 +1,73 @@
+{%- extends "layout.html" -%}
+
+{% if docpath != '/' %}
+{% set title = docpath %}
+{% endif %}
+
+{% set pane_icon = 'document' %}
+
+{% block head -%}
+    <link rel="alternate" type="application/atom+xml" href="{{ url_for('index', do='atom') }}" title="Changes" />
+    <link rel="alternate" type="application/atom+xml" href="{{ url_for('index', path=docpath, do='atom') }}" title="Changes - {{ docpath }}" />
+{%- endblock %}
+
+{% block pane_content -%}
+    {% if not is_file and content -%}
+        <h1>{{ _('Table of contents') }}</h1>
+        {{ content|render(toc=True) }}
+    {%- endif %}
+{%- endblock %}
+
+{% block view_toolbar -%}
+    {% call m.toolbar() %}
+        {{ m.menu('view', items=[
+            m.menuitem('title', split_path(docpath)[-1][0] if docpath != '/' else _('Main page'), None, 'document'),
+        ]) }}
+
+        {% if not immutable -%}
+            {% if content -%}
+                {{ m.menu('view-action-more', items=[
+                    m.menuitem('drop', None, '#', 'drop', class='drop',
+                        menu=m.menu('view-action-more-items', class='bottom right', items=[
+                            m.menuitem('upload', _('Upload file'), url_for('index', path='file:')) if session.get('uid'),
+                            m.menuitem('delete', _('Delete document'), url_for('index', path=docpath, do='delete')) if session.get('uid'),
+                            m.menuitem('move', _('Move document'), url_for('index', path=docpath, do='move')) if session.get('uid'),
+                            m.menuitem('source', _('Show source'), url_for('index', path=docpath, do='source', rev=request.args.get('rev') if request.args.get('rev'))),
+                        ])
+                    )
+                ]) }}
+
+                {{ m.menu('view-action', items=[
+                    m.menuitem('edit', _('Edit'), url_for('index', path=docpath, do='edit'), 'edit'),
+                    m.menuitem('history', _('History'), url_for('index', path=docpath, do='history'), 'time'),
+                ]) }}
+            {%- else -%}
+                {{ m.menu('view-action', items=[
+                    m.menuitem('create', _('Create document'), url_for('index', path=docpath, do='edit'), 'plus'),
+                    m.menuitem('history', _('History'), url_for('index', path=docpath, do='history'), 'time') if content != None,
+                ]) }}
+            {%- endif %}
+        {%- endif %}
+    {%- endcall %}
+{%- endblock %}
+
+{% block view_content -%}
+    <div class="document">
+        {% include "message.html" %}
+
+        {% if content == '' %}
+        <p>{{ _('This document has been deleted.') }}</p>
+        {% elif content == None %}
+        <p>{{ _('This document does not exist.') }}</p>
+        {% else %}
+            {% if is_file %}
+                {% include "wiki/preview.html" %}
+            {% else %}
+                {{ content|render }}
+            {% endif %}
+            {% if rev_info %}
+                <p class="footer">{{ _('Last updated on %(date)s by %(author)s', date=rev_info[0]|datetimeformat|strong, author=rev_info[2]|strong) }}</p>
+            {% endif %}
+        {% endif %}
+    </div>
+{%- endblock %}

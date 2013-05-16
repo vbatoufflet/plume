@@ -1,0 +1,20 @@
+TODO
+====
+
+High
+----
+
+None
+
+Medium
+------
+
+ * Add option to remove deleted documents from search results.
+ * Add Debian packaging support.
+ * Make Whoosh index update incremental.
+
+Low
+---
+
+ * Make Gravatar usage optional.
+ * Add document rendering cache.

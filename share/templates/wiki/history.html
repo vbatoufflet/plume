@@ -1,0 +1,60 @@
+{%- extends "layout.html" -%}
+
+{% set title = _('History - %(path)s', path=docpath) %}
+
+{% set pane_icon = 'time' %}
+
+{% block view_toolbar -%}
+    {% call m.toolbar() %}
+        {{ m.menu('view', items=[
+            m.menuitem('title', _('Document history'), None, 'time'),
+        ]) }}
+
+        {{ m.menu('view-action', items=[
+            m.menuitem('back', ('Back to document'), url_for('index', path=docpath), 'back'),
+        ]) }}
+    {%- endcall %}
+{%- endblock %}
+
+{% block view_content -%}
+    <div class="document">
+        <form action="{{ url_for('index', path=docpath) }}" method="get">
+            {% include "message.html" %}
+
+            {% if not is_file %}
+            <p>
+                <input name="do" type="hidden" value="compare" />
+                <button type="submit" data-icon="diff">{{ _('Compare revisions') }}</button>
+            </p>
+            {% else %}
+            <p>{{ _('Click on one of the following dates to view the file as it was at that time:') }}</p>
+            {% endif %}
+
+            <table class="history">
+                <tbody>
+                {% set count = 0 if not is_file %}
+                {% for date, rev, author, desc in history %}
+                    <tr>
+                        {% if not is_file %}
+                        <td class="diff">
+                            <input name="from" type="radio" value="{{ rev }}"{{ ' checked="checked"' if count == 1 }} />
+                            <input name="to" type="radio" value="{{ rev }}"{{ ' checked="checked"' if count == 0 }} />
+                        </td>
+                        {% endif %}
+                        <td class="date"><a href="{{ url_for('index', path=docpath, rev=rev) }}">{{ date }}</a></td>
+                        <td class="author">{{ author }}</td>
+                        <td class="desc">{{ desc }}</td>
+                    </tr>
+                    {% set count = count + 1 if not is_file %}
+                {% endfor %}
+                </tbody>
+            </table>
+
+            {% if not is_file %}
+            <p>
+                <button type="submit" data-icon="diff">{{ _('Compare revisions') }}</button>
+            </p>
+            {% endif %}
+        </form>
+    </div>
+{%- endblock %}

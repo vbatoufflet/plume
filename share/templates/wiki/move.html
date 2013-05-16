@@ -1,0 +1,35 @@
+{%- extends "layout.html" -%}
+
+{% set title = _('Move - %(path)s', path=docpath) %}
+
+{% set pane_icon = 'move' %}
+
+{% block pane_content %}
+    <p class="msgwarn">{{ _('Please note that all past revisions will be moved and that the old path will be lost.') }}</p>
+{% endblock %}
+
+{% block view_toolbar %}
+    {% call m.toolbar() %}
+        {{ m.menu('view', items=[
+            m.menuitem('title', _('Document move'), None, 'move'),
+        ]) }}
+    {%- endcall %}
+{% endblock %}
+
+{% block view_content %}
+    <div class="document">
+        <form action="{{ url_for('index', path=docpath, do='move') }}" method="post">
+            {% include "message.html" %}
+
+            <p>
+                <label for="path">{{ _('Document path') }}</label>
+                <input id="path" name="path" type="text" value="{{ docpath }}" placeholder="{{ docpath }}" autofocus="autofocus" />
+            </p>
+
+            <p>
+                <input name="validate" type="submit" value="{{ _('Move document') }}" />
+                <a href="{{ url_for('index', path=docpath) }}" class="button">{{ _('Cancel') }}</a>
+            </p>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,106 @@
+{%- import "macro.html" as m -%}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ config.get('TITLE', 'Plume') }}{{ ' - ' + title if title }}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    {%- if request.script_root %}
+    <meta name="plume-root" content="{{ request.script_root }}" />
+    {% endif %}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='themes/%s/favicon.png' % config.get('THEME', 'default')) }}" type="image/png" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='themes/%s/styles.css' % config.get('THEME', 'default')) }}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='themes/%s/styles.print.css' % config.get('THEME', 'default')) }}" media="print" />
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery.cookie.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='plume.js') }}"></script>
+    {%- block head %}{% endblock %}
+</head>
+<body>
+{% block body %}
+    <div id="header" class="header">
+        <div class="title">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='themes/%s/logo.png' % config.get('THEME', 'default')) }}" alt="">
+            </div>
+
+            <h1><a href="{{ url_for('index') }}">{{ config.get('TITLE', 'Plume') }}</a></h1>
+
+            {% if docpath %}
+                {% set items = [] %}
+                {% set chunks = split_path(docpath) if docpath != '/' else [(_('Main page'), '/')] %}
+                {% for label, path in chunks %}
+                    {% do items.append(m.menuitem(None, label, url_for('index', path=path))) %}
+                {% endfor %}
+
+                {{ m.menu('path', items=items) }}
+            {% else %}
+            <h2>{{ title }}</h2>
+            {% endif %}
+        </div>
+
+        <div class="search">
+            <form action="{{ url_for('search') }}" method="get">
+                <input name="q" type="text" value="{{ request.args.get('q', '')|e }}" placeholder="{{ _('Search') }}" />
+            </form>
+        </div>
+
+        <ul data-menu="system" class="menu">
+            {% if not session.get('uid') %}
+            <li data-menuitem="signin" class="menuitem">
+                <a href="{{ url_for('signin') }}" data-icon="signin">{{ _('Sign in') }}</a>
+                <div class="menu">
+                    {% set included = True %}
+                    {% set next = request.path %}
+                    {% include "signin.html" %}
+                </div>
+            </li>
+            {% else %}
+            <li data-menuitem="user" class="menuitem">
+                <a href="#" data-icon="user" class="drop">{{ session.get('login') }}</a>
+                <div class="menu">
+                    <p class="info">
+                        <img src="{{ session.get('avatar') }}?s=64" alt="avatar" />
+                        <span class="name">{{ session.get('name') }}</span>
+                        <a href="{{ url_for('settings') }}" data-icon="settings">{{ _('User settings') }}</a>
+                    </p>
+                    <p class="action">
+                        <a href="{{ url_for('signout', next=docpath) }}" class="button">{{ _('Sign out') }}</a>
+                    </p>
+                </div>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+
+    {% if not full %}
+    <div id="pane" class="pane">
+        {% block pane %}
+            {% block pane_toolbar %}
+                {% call m.toolbar() %}
+                    {{ m.menu('pane-fold', items=[
+                        m.menuitem('fold', None, '#', 'left'),
+                    ]) }}
+                 {%- endcall %}
+            {% endblock %}
+
+            <div{{ ' data-icon="%s"'|safe % pane_icon if pane_icon}} class="content">
+            {% block pane_content %}{% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+    {% endif %}
+
+    <div id="view" class="view{{ ' full' if full }}">
+        {% block view %}
+            {% block view_toolbar %}{% endblock %}
+
+            <div class="content">
+            {% block view_content %}{% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+    {% endblock %}
+</body>
+</html>

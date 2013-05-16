@@ -1,0 +1,32 @@
+{%- extends "layout.html" -%}
+
+{% set title = _('Error') %}
+
+{% set pane_icon = 'warn' %}
+
+{% block pane_toolbar -%}
+    {% call m.toolbar() %}
+    {%- endcall %}
+{%- endblock %}
+
+{% block view_toolbar -%}
+    {% call m.toolbar() %}
+        {{ m.menu('view', items=[
+            m.menuitem('title', _('Error'), None),
+        ]) }}
+
+        {{ m.menu('view-action', items=[
+            m.menuitem('back', _('Back to main page'), url_for('index'), 'back'),
+        ]) }}
+    {%- endcall %}
+{%- endblock %}
+
+{% block view_content -%}
+    <div class="document">
+        {% if message %}
+        <p class="msgwarn">{{ _('The following error occured while processing your request: %(path)s', path='<br />'|safe + message|strong) }}</p>
+        {% else %}
+        <p class="msgwarn">{{ _('An unhandled error occured while processing your request.') }}</p>
+        {% endif %}
+    </div>
+{%- endblock %}

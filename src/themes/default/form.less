@@ -1,0 +1,56 @@
+
+button,
+input,
+select {
+    font-family: 'Source Sans Pro', serif;
+    font-size: 18px;
+}
+
+textarea {
+    font-family: 'Anonymous Pro', monospace;
+    font-size: 0.85em;
+}
+
+input,
+select,
+textarea {
+    outline: none;
+}
+
+select,
+input[type=text],
+input[type=password] {
+    background-color: @InputTextBackgroundColor;
+    border: 0.25em solid darken(@InputTextBackgroundColor, 10);
+    padding: 0.25em;
+}
+
+button,
+input[type=button],
+input[type=reset],
+input[type=submit] {
+    .button;
+}
+
+button::-moz-focus-inner,
+input[type=button]::-moz-focus-inner,
+input[type=reset]::-moz-focus-inner,
+input[type=submit]::-moz-focus-inner {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+a.button {
+    .button;
+}
+
+.button () {
+    background-color: @ToolbarBackgroundColor;
+    border: none;
+    color: @ToolbarTextColor;
+    cursor: pointer;
+    font-weight: 400;
+    padding: 0.35em 0.65em;
+    text-decoration: none;
+}

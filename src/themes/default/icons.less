@@ -1,0 +1,43 @@
+
+.icon () {
+    cursor: default;
+    font-family: 'Font Awesome';
+    .font-smoothing(antialiased);
+    font-style: normal;
+    font-weight: normal;
+    margin-right: 0.5em;
+    text-decoration: inherit;
+}
+
+a[data-icon]:before {
+    cursor: pointer;
+}
+
+[data-icon]:before {
+    .icon;
+}
+
+[data-icon=search]:before   { content: '\f002'; }
+[data-icon=user]:before     { content: '\f007'; }
+[data-icon=cross]:before    { content: '\f00d'; }
+[data-icon=delete]:before   { content: '\f014'; }
+[data-icon=home]:before     { content: '\f015'; }
+[data-icon=time]:before     { content: '\f017'; }
+[data-icon=lock]:before     { content: '\f023'; }
+[data-icon=document]:before { content: '\f02d'; }
+[data-icon=edit]:before     { content: '\f040'; }
+[data-icon=info]:before     { content: '\f05a'; }
+[data-icon=back]:before     { content: '\f060'; }
+[data-icon=plus]:before     { content: '\f067'; }
+[data-icon=error]:before    { content: '\f06a'; }
+[data-icon=view]:before     { content: '\f06e'; }
+[data-icon=warn]:before     { content: '\f071'; }
+[data-icon=move]:before     { content: '\f07e'; }
+[data-icon=signout]:before  { content: '\f08b'; }
+[data-icon=signin]:before   { content: '\f090'; }
+[data-icon=save]:before     { content: '\f0a0'; }
+[data-icon=diff]:before     { content: '\f0db'; }
+[data-icon=left]:before     { content: '\f104'; }
+[data-icon=right]:before    { content: '\f105'; }
+[data-icon=top]:before      { content: '\f106'; }
+[data-icon=drop]:before     { content: '\f107'; }
