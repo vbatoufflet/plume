@@ -120,9 +120,14 @@ def get_history(path, rev=None):
         raise DocumentNotFound()
 
     # Get revision history
+    file_path = os.path.join(dir_path, 'meta')
+
+    if not os.path.exists(file_path):
+        return []
+
     history = []
 
-    for line in codecs.open(os.path.join(dir_path, 'meta'), 'r', 'utf-8'):
+    for line in codecs.open(file_path, 'r', 'utf-8'):
         chunks = line.strip().split('\x00')
         chunks[0] = datetime.utcfromtimestamp(float(chunks[0]))
         chunks[1] = int(chunks[1])
