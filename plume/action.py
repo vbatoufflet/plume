@@ -37,7 +37,7 @@ def do_atom(path=None):
 
     for date, path, rev, author, desc in history:
         feed.add(path, desc if desc != '-' else 'No summary available',
-            url=url_for('index', do='compare', to=rev),
+            url=url_for('index', path=path, do='compare', to=rev),
             author=author,
             updated=date)
 
