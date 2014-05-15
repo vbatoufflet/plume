@@ -42,7 +42,7 @@ try:
     args.func(args)
 except KeyboardInterrupt:
     pass
-except Exception, e:
+except Exception as e:
     if args.debug:
         print('-' * 80)
 
