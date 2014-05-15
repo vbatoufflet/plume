@@ -6,9 +6,15 @@
     <title>{{ config.get('TITLE', 'Plume') }}{{ ' - ' + title if title }}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    {%- if meta and meta.description %}
+    <meta name="description" content="{{ meta.description }}" />
+    {%- endif %}
+    {%- if meta and meta.keywords %}
+    <meta name="keywords" content="{{ meta.keywords|join(',') }}" />
+    {%- endif %}
     {%- if request.script_root %}
     <meta name="plume-root" content="{{ request.script_root }}" />
-    {% endif %}
+    {%- endif %}
     <link rel="shortcut icon" href="{{ url_for('static', filename='themes/%s/favicon.png' % config.get('THEME', 'default')) }}" type="image/png" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='themes/%s/styles.css' % config.get('THEME', 'default')) }}" media="screen" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='themes/%s/styles.print.css' % config.get('THEME', 'default')) }}" media="print" />

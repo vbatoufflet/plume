@@ -55,5 +55,6 @@ setup(
         'Pygments >= 1.3.1',
         'SQLAlchemy > 0.7.2',
         'Whoosh >= 2.4.1',
+        'pyyaml >= 3.10',
     ],
 )

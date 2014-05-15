@@ -65,6 +65,10 @@ def render_diff(file_from, file_to):
 
 
 def render_document(data, toc=False):
+    # Strip meta if any
+    if data.startswith('---'):
+        data = data[data.find('---', 3) + 3:]
+
     # Render Markdown document (removing user-inputted HTML)
     renderer = (HtmlTocRenderer if toc else PlumeRenderer)(flags=HTML_HARD_WRAP | HTML_SKIP_HTML | HTML_TOC)
 

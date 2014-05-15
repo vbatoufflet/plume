@@ -15,6 +15,7 @@ from numbers import Number
 from plume import DOCUMENT_DIR, FILE_PREFIX, HELP_DIR
 from plume.exception import *
 from plume.utils import decode_path, encode_path, stream_file
+from yaml import safe_load as yaml_load
 
 
 def append_history(path, *args):
@@ -35,7 +36,15 @@ def check_mimetype(path, file_name):
     return path.startswith(FILE_PREFIX) and guess_type(path)[0] == guess_type(file_name)[0]
 
 
-def get_document(path, rev=None, preview=False):
+def extract_meta(data):
+    if data.startswith('---'):
+        head, data = data[3:].split('---', 1)
+        return yaml_load(head), data
+    else:
+        return {}, data
+
+
+def get_document(path, rev=None, meta=False, preview=False):
     if not path:
         raise EmptyDocumentPath()
     elif rev and not isinstance(rev, Number) and not rev.isdigit():
@@ -49,9 +58,12 @@ def get_document(path, rev=None, preview=False):
 
     if path.startswith(FILE_PREFIX):
         mimetype = guess_type(path)[0]
-        result = [mimetype if mimetype else 'application/octet-stream', stream_file(file_path) if not preview else True]
+        result = [mimetype if mimetype else 'application/octet-stream', {},
+            stream_file(file_path) if not preview else True]
     else:
-        result = ['text/plain', codecs.open(file_path, 'r', 'utf-8').read()]
+        data = codecs.open(file_path, 'r', 'utf-8').read()
+        result = ['text/plain']
+        result.extend(extract_meta(data) if not meta else (None, data))
 
     result.insert(1, os.path.getsize(file_path))
 

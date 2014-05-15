@@ -161,9 +161,13 @@ def do_show(path, action='show'):
 
     # Get document data
     try:
-        mimetype, size, content = get_document(path, request.args.get('rev'), preview=path.startswith(FILE_PREFIX))
+        mimetype, size, meta, content = get_document(path, request.args.get('rev'),
+            meta=(action == 'edit'), preview=is_file)
     except DocumentNotFound:
-        mimetype, size, content = None, 0, None
+        mimetype, size, meta, content = None, 0, None, None
+
+    if action == 'edit':
+        meta = None
 
     # Handle normal documents
     if action == 'edit' and 'data' in request.form:
@@ -181,7 +185,7 @@ def do_show(path, action='show'):
         return render_document(content)
 
     response = Response(render_template('wiki/%s.html' % action, is_file=is_file, mimetype=mimetype,
-        content=content, rev_info=rev_info, lock_info=lock_info), 404 if content is None else 200)
+        meta=meta, content=content, rev_info=rev_info, lock_info=lock_info), 404 if content is None else 200)
 
     if action == 'edit':
         response.cache_control.no_cache = True
@@ -197,7 +201,7 @@ def do_source(path):
         return Response(status=304)
 
     # Show document source
-    mimetype, size, content = get_document(path, request.args.get('rev'))
+    mimetype, size, meta, content = get_document(path, request.args.get('rev'))
 
     response = Response(content, direct_passthrough=True)
     response.headers.add('Content-Length', size)
