@@ -47,11 +47,11 @@ lint: $(JS_FILE)
 install: $(JS_FILE_MIN)
 	@echo -n 'Installing files... '
 	@install -m 0755 -d $(DST_DIR) && install -m 0644 $(JS_FILE_MIN) $(DST_DIR)/$(JS_FILE) && echo OK || echo Fail
-	@echo -n 'Installing extra files... '
-	@cd extra && for FILE in $(EXT_FILES); do cp -r $$FILE ../$(DST_DIR)/`echo $$FILE | sed -e 's;\.min\.js$$;.js;'`; \
+	@echo -n 'Installing third-party files... '
+	@cd thirdparty && for FILE in $(EXT_FILES); do cp -r $$FILE ../$(DST_DIR)/`echo $$FILE | sed -e 's;\.min\.js$$;.js;'`; \
 		done && echo OK || echo Fail
 
 devel: install
 	@echo -n 'Overriding files... '
 	@install -m 0644 $(JS_FILE) $(DST_DIR)/$(JS_FILE) && \
-		cd extra && cp -r $(EXT_DEVEL) ../$(DST_DIR)/ && echo OK || echo Fail
+		cd thirdparty && cp -r $(EXT_DEVEL) ../$(DST_DIR)/ && echo OK || echo Fail

@@ -28,7 +28,7 @@ env:
 	$(VIRTUALENV) --distribute --no-site-packages $(PREFIX)
 	$(PYTHON) setup.py develop
 
-static: env
+static:
 	@echo '[Build static files]'
 	$(MAKE) -C src all
 
