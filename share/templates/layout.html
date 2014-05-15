@@ -12,9 +12,6 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='themes/%s/favicon.png' % config.get('THEME', 'default')) }}" type="image/png" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='themes/%s/styles.css' % config.get('THEME', 'default')) }}" media="screen" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='themes/%s/styles.print.css' % config.get('THEME', 'default')) }}" media="print" />
-    <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='jquery.cookie.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='plume.js') }}"></script>
     {%- block head %}{% endblock %}
 </head>
 <body>
@@ -102,5 +99,9 @@
         {% endblock %}
     </div>
     {% endblock %}
+
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery.cookie.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='plume.js') }}"></script>
 </body>
 </html>
