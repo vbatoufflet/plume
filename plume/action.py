@@ -201,7 +201,7 @@ def do_source(path):
         return Response(status=304)
 
     # Show document source
-    mimetype, size, meta, content = get_document(path, request.args.get('rev'))
+    mimetype, size, meta, content = get_document(path, request.args.get('rev'), meta=True)
 
     response = Response(content, direct_passthrough=True)
     response.headers.add('Content-Length', size)
