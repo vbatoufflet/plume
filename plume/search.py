@@ -10,7 +10,7 @@ import os
 import sys
 
 from plume import DATA_DIR, FILE_PREFIX
-from plume.backend import get_file_path, get_history, get_documents_list
+from plume.backend import get_document, get_documents_list, get_file_path, get_history
 from whoosh import index as Index, query, sorting
 from whoosh.analysis import StemmingAnalyzer
 from whoosh.fields import SchemaClass, DATETIME, ID, KEYWORD, NUMERIC, TEXT
@@ -62,12 +62,17 @@ def index_documents(init=False):
                 if not init and (path, rev) in indexed:
                     continue
 
+                if not path.startswith(FILE_PREFIX):
+                    meta, content = get_document(path, rev)[2:]
+                else:
+                    meta, content = None, u''
+
                 writer.add_document(path=path,
                     date=date,
                     author=unicode(author),
                     revision=rev,
-                    content=unicode(codecs.open(get_file_path(path, rev=rev), 'r', 'utf-8').read())
-                        if not path.startswith(FILE_PREFIX) else u'',
+                    tags=meta.get('tags', []) if meta else [],
+                    content=content,
                 )
         except:
             sys.stderr.write("Error: can't index %s\n" % path)
@@ -88,7 +93,13 @@ def search_documents(filter):
 
     index = Index.open_dir(dir_path)
 
-    parser = MultifieldParser(['path', 'content'], schema=index.schema)
+    if filter.startswith('tags:'):
+        fields = ['tags']
+        filter = filter[5:]
+    else:
+        fields = ['path', 'content']
+
+    parser = MultifieldParser(fields, schema=index.schema)
     search_query = parser.parse(unicode(filter))
 
     # Try documents search

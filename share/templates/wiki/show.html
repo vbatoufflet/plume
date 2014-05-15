@@ -68,6 +68,11 @@
             {% if rev_info %}
                 <p class="footer">{{ _('Last updated on %(date)s by %(author)s', date=rev_info[0]|datetimeformat|strong, author=rev_info[2]|strong) }}</p>
             {% endif %}
+            {%- if meta and meta.tags %}
+                <ul class="tags" data-icon="tag">
+			{% for tag in meta.tags %}<li><a href="{{ url_for('search', q='tags:'+tag) }}">{{ tag }}</a></li>{% endfor %}
+                </ul>
+            {%- endif %}
         {% endif %}
     </div>
 {%- endblock %}
