@@ -9,8 +9,8 @@
     {%- if meta and meta.description %}
     <meta name="description" content="{{ meta.description }}" />
     {%- endif %}
-    {%- if meta and meta.keywords %}
-    <meta name="keywords" content="{{ meta.keywords|join(',') }}" />
+    {%- if meta and meta.tags %}
+    <meta name="keywords" content="{{ meta.tags|join(',') }}" />
     {%- endif %}
     {%- if request.script_root %}
     <meta name="plume-root" content="{{ request.script_root }}" />
